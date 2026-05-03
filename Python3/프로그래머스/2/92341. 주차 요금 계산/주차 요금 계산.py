@@ -1,4 +1,5 @@
 import math
+from collections import defaultdict
 
 
 def transform(time):
@@ -18,7 +19,7 @@ def solution(fees, records):
     
     in_time=0
     i=0
-    time_dict={}
+    time_dict=defaultdict(int)
     cnt=0
     while i< len(new_records):
         # if cnt >= 10: break
@@ -28,22 +29,13 @@ def solution(fees, records):
             if i+1 < len(new_records):
                 next = new_records[i+1]
                 if cur[1] == next[1] and next[2]=="OUT":
-                    if cur[1] in time_dict:
-                        time_dict[cur[1]] += transform(next[0])-transform(cur[0])
-                    else: 
-                        time_dict[cur[1]] = transform(next[0])-transform(cur[0])
+                    time_dict[cur[1]] += transform(next[0])-transform(cur[0])
                     i+=2
                 else:
-                    if cur[1] in time_dict:
-                        time_dict[cur[1]] += transform("23:59")-transform(cur[0])
-                    else: 
-                        time_dict[cur[1]] = transform("23:59")-transform(cur[0])
+                    time_dict[cur[1]] += transform("23:59")-transform(cur[0])
                     i+=1
             else: # 다음이 없음
-                if cur[1] in time_dict:
-                        time_dict[cur[1]] += transform("23:59")-transform(cur[0])
-                else: 
-                        time_dict[cur[1]] = transform("23:59")-transform(cur[0])
+                time_dict[cur[1]] += transform("23:59")-transform(cur[0])
                 break
                 
         else:
