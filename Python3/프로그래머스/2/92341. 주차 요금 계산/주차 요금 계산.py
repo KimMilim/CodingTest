@@ -8,21 +8,16 @@ def transform(time):
     
     return res
 
-
 def solution(fees, records):
     answer = []
     
     new_records = [ele.split(" ") for ele in records]
     new_records.sort(key = lambda x: (x[1], x[0]))
     
-    check = [0]*len(records)
-    
-    in_time=0
+
     i=0
     time_dict=defaultdict(int)
-    cnt=0
     while i< len(new_records):
-        # if cnt >= 10: break
         cur = new_records[i]
         
         if cur[2]== "IN":
@@ -40,7 +35,6 @@ def solution(fees, records):
                 
         else:
             i+=1
-        # cnt+=1
     
     for c,t in time_dict.items():
         if t <= fees[0]:
@@ -50,7 +44,6 @@ def solution(fees, records):
             t-=fees[0]
             total_fees += math.ceil(t/fees[2])*fees[3]
         answer.append(total_fees)
-        # print("car: ", c, "fees: ", total_fees)
             
                 
     
