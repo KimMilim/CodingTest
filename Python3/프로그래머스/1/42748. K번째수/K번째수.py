@@ -1,0 +1,11 @@
+def solution(array, commands):
+    answer = []
+    
+    for i,j,k in commands:
+        tmp = sorted(array[i-1:j])
+        # print(tmp)
+        answer.append(tmp[k-1])
+        
+    
+    
+    return answer
